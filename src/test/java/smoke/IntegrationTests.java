@@ -1,9 +1,5 @@
 package smoke;
 
-import java.lang.invoke.MethodHandles;
-import java.util.Map;
-import java.util.concurrent.TimeUnit;
-
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.awaitility.Awaitility;
@@ -15,6 +11,10 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.http.ResponseEntity;
 import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.web.client.RestTemplate;
+
+import java.lang.invoke.MethodHandles;
+import java.util.Map;
+import java.util.concurrent.TimeUnit;
 
 import static org.assertj.core.api.BDDAssertions.then;
 import static org.awaitility.Awaitility.await;
@@ -30,8 +30,8 @@ public class IntegrationTests {
 
 	private static final Log log = LogFactory.getLog(MethodHandles.lookup().lookupClass());
 
-	@Value("${stubrunner.url}") String stubRunnerUrl;
-	@Value("${application.url}") String applicationUrl;
+	@Value("${stubrunner.url:localhost:8083}") String stubRunnerUrl;
+	@Value("${application.url:localhost:8081}") String applicationUrl;
 	@Value("${test.timeout:60}") Long timeout;
 
 	RestTemplate restTemplate = new RestTemplate();

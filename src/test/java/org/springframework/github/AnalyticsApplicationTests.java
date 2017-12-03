@@ -14,8 +14,11 @@ import static org.assertj.core.api.BDDAssertions.then;
 
 @RunWith(SpringJUnit4ClassRunner.class)
 @SpringBootTest(classes = AnalyticsApplication.class, webEnvironment = SpringBootTest.WebEnvironment.NONE)
-@AutoConfigureStubRunner(ids = {"com.example.github:github-webhook"},
-		repositoryRoot = "${REPO_WITH_JARS:https://repo.spring.io/milestone/}")
+@AutoConfigureStubRunner(ids = {"com.example.github:github-webhook:+:stubs:6565"}, workOffline = true)
+/*@AutoConfigureStubRunner(ids = {"com.example.github:github-webhook"},
+		repositoryRoot = "${REPO_WITH_JARS:https://repo.spring.io/milestone/}")*/
+/**@AutoConfigureStubRunner(ids = {"com.example.github:github-webhook"},
+repositoryRoot = "${REPO_WITH_JARS:https://localhost:8081/artifactory/libs-release-local/}")**/
 @ActiveProfiles("test")
 public class AnalyticsApplicationTests {
 
