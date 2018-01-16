@@ -1,12 +1,14 @@
 package org.springframework.github;
 
 import com.jayway.restassured.module.mockmvc.RestAssuredMockMvc;
+import org.junit.Before;
+import org.mockito.Mockito;
+import org.springframework.github.core.model.IssueDto;
+import org.springframework.github.core.service.impl.IssuesService;
+import org.springframework.github.webservice.api.rest.controller.IssuesController;
 
 import java.util.ArrayList;
 import java.util.List;
-
-import org.junit.Before;
-import org.mockito.Mockito;
 
 import static org.mockito.BDDMockito.given;
 
@@ -29,7 +31,7 @@ public class BaseClass {
 
 	private List<IssueDto> issues() {
 		List<IssueDto> dtos = new ArrayList<>();
-		dtos.add(new IssueDto("foo", "spring-cloud/bar"));
+		dtos.add(new IssueDto("foo", "spring-cloud/bar", null));
 		return dtos;
 	}
 }

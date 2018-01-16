@@ -14,46 +14,52 @@
  * limitations under the License.
  */
 
-package org.springframework.github;
+package org.springframework.github.core.model.entity;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
-import javax.persistence.Table;
+import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 
 @Entity
 @Table(name = "issues")
-class Issues {
-	@Id
-	@GeneratedValue
+public class Issues {
+
 	private Long id;
 	@NotNull
 	private String username;
 	@NotNull
 	private String repository;
 
-	Issues(String username, String repository) {
+	public Issues(String username, String repository) {
 		this.username = username;
 		this.repository = repository;
 	}
 
-	Issues() {
+	public Issues() {
 	}
 
-	String getUsername() {
+	@Id
+	@GeneratedValue(strategy= GenerationType.AUTO)
+	public Long getId() {
+		return id;
+	}
+
+	public void setId(Long id) {
+		this.id = id;
+	}
+
+	public String getUsername() {
 		return this.username;
 	}
 
-	void setUsername(String username) {
+	public void setUsername(String username) {
 		this.username = username;
 	}
 
-	String getRepository() {
+	public String getRepository() {
 		return this.repository;
 	}
 
-	void setRepository(String lastname) {
+	public void setRepository(String lastname) {
 		this.repository = lastname;
 	}
 

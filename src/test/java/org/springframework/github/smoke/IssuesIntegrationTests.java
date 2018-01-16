@@ -1,4 +1,4 @@
-package smoke;
+package org.springframework.github.smoke;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
@@ -23,16 +23,16 @@ import static org.awaitility.Awaitility.await;
  * @author Marcin Grzejszczak
  */
 @RunWith(SpringRunner.class)
-@SpringBootTest(classes = IntegrationTests.class,
+@SpringBootTest(classes = IssuesIntegrationTests.class,
 		webEnvironment = SpringBootTest.WebEnvironment.NONE)
 @EnableAutoConfiguration
-public class IntegrationTests {
+public class IssuesIntegrationTests {
 
 	private static final Log log = LogFactory.getLog(MethodHandles.lookup().lookupClass());
 
-	@Value("${stubrunner.url:localhost:8083}") String stubRunnerUrl;
+	@Value("${stubrunner.url:localhost:8080}") String stubRunnerUrl;
 	@Value("${application.url:localhost:8081}") String applicationUrl;
-	@Value("${test.timeout:60}") Long timeout;
+	@Value("${test.timeout:60000}") Long timeout;
 
 	RestTemplate restTemplate = new RestTemplate();
 

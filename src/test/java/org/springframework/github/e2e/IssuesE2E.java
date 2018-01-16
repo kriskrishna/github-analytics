@@ -1,10 +1,4 @@
-package e2e;
-
-import java.io.IOException;
-import java.lang.invoke.MethodHandles;
-import java.net.URI;
-import java.nio.file.Files;
-import java.util.concurrent.TimeUnit;
+package org.springframework.github.e2e;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
@@ -21,6 +15,12 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.web.client.RestTemplate;
 
+import java.io.IOException;
+import java.lang.invoke.MethodHandles;
+import java.net.URI;
+import java.nio.file.Files;
+import java.util.concurrent.TimeUnit;
+
 import static org.assertj.core.api.BDDAssertions.then;
 import static org.awaitility.Awaitility.await;
 
@@ -28,14 +28,15 @@ import static org.awaitility.Awaitility.await;
  * @author Marcin Grzejszczak
  */
 @RunWith(SpringRunner.class)
-@SpringBootTest(classes = E2eTests.class,
+@SpringBootTest(classes = IssuesE2E.class,
 		webEnvironment = SpringBootTest.WebEnvironment.NONE)
 @EnableAutoConfiguration
-public class E2eTests {
+public class IssuesE2E {
 
 	private static final Log log = LogFactory.getLog(MethodHandles.lookup().lookupClass());
 
-	@Value("${application.url}") String applicationUrl;
+	@Value("${application.url:localhost:8081}") String applicationUrl;
+	@Value("${githubwebhookapplicationUrl.url:localhost:8082}") String githubwebHookApplicationUrl;
 	@Value("${classpath:json/issue-created.json}") Resource json;
 	@Value("${test.timeout:60}") Long timeout;
 
@@ -60,7 +61,8 @@ public class E2eTests {
 	private ResponseEntity<String> callData() throws IOException {
 		return this.restTemplate.exchange(RequestEntity
 				.post(URI.create("http://" +
-						this.applicationUrl.replace("github-analytics", "github-webhook")))
+						//this.applicationUrl.replace("github-analytics", "github-webhook")))
+						this.githubwebHookApplicationUrl ))
 				.contentType(MediaType.APPLICATION_JSON)
 				.body(data()), String.class);
 	}

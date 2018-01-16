@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.cloud.contract.stubrunner.StubTrigger;
 import org.springframework.cloud.contract.stubrunner.spring.AutoConfigureStubRunner;
+import org.springframework.github.core.repository.IssuesRepository;
 import org.springframework.test.context.ActiveProfiles;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
@@ -23,7 +24,8 @@ repositoryRoot = "${REPO_WITH_JARS:https://localhost:8081/artifactory/libs-relea
 public class AnalyticsApplicationTests {
 
 	@Autowired StubTrigger stubTrigger;
-	@Autowired IssuesRepository repo;
+	@Autowired
+	IssuesRepository repo;
 
 	@Test
 	public void should_store_a_new_issue() {
